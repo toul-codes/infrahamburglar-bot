@@ -20,6 +20,7 @@ const (
 	OAuthTokenEnvKeyName       = "GOTWI_ACCESS_TOKEN"
 	OAuthTokenSecretEnvKeyName = "GOTWI_ACCESS_TOKEN_SECRET"
 	USER                       = "1510513502628331522"
+	SPAM                       = "1343113027139284992"
 )
 
 // SimpleTweet posts a tweet with only text, and return posted tweet ID.
@@ -72,7 +73,7 @@ func execSearchStream() {
 			fmt.Printf("ERR: ", err)
 		} else {
 			if t != nil {
-				if gotwi.StringValue(t.Data.AuthorID) != USER {
+				if gotwi.StringValue(t.Data.AuthorID) != USER && gotwi.StringValue(t.Data.AuthorID) != SPAM {
 					if !strings.Contains(gotwi.StringValue(t.Data.Text), "RT") {
 						cnt++
 						oauth1Client, err := newOAuth1Client()
